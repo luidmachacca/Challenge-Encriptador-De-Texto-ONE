@@ -1,0 +1,234 @@
+/* -- importing fonts from google fonts -- */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* ========== body ========== */
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #F3F5FC;
+}
+
+/* ===== header ===== */
+
+.picture {
+  padding: 20px 0px 5px 90px;
+}
+
+/* ===== main ===== */
+
+/* -- < div class= first_div > --*/
+
+.first_div {
+  margin: 0 10px 0 250px;
+  border: solid;
+  border-color:transparent;
+  border-radius: 10px;
+  display: inline-block;
+
+}
+
+/*  textarea settings class=nikole */
+
+.nikole {
+  margin: 10px;
+  padding: 14px;
+  border-radius: 5px;
+  border: 2px solid skyblue;
+  background: rgba(255, 255, 255, 0.1);
+  resize: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: #0A3871;
+
+}
+
+.nikole::placeholder {
+  color: #0A3871;
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.nikole:focus {
+  outline: none;
+  border-color:transparent;
+}
+
+.nikole::-webkit-scrollbar {
+  display: none;
+}
+
+/* -- <  div class= second_div > --*/
+.second_div {
+  border: solid;
+  border-color: transparent;
+  border-radius: 20px;
+  background: white;
+  background-image: url(../img/Muñeco.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  padding: 10px;
+  width: 280px;
+  height: 610px;
+  top: 10px;
+  left: 1020px;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* --< p id="aviso" > --*/
+#aviso{
+margin-top: 28rem;
+text-align: center;
+font-weight: bold;
+font-size: 18px;
+}
+
+#mensaje{
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+
+
+
+
+/* -- < div class= alert > -- */
+
+/* circle */
+.alert{
+  font-size: 12px;
+  margin-left: 280px;
+  color:#495057
+  
+}
+.circle {
+  background: #495057;
+  border-radius: 50%;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  text-align: center; 
+}
+
+.exclamation {
+  display: inline-block;
+  line-height: 16px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  display: inline-block;
+  margin-left: 350px;
+}
+
+.uno, .dos, .tres {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.uno {
+  background: #EF4139;
+}
+
+.dos {
+  background: #FDBD14;
+}
+
+.tres {
+  background: #1BCA34;
+}
+
+
+/* -- < div class= buttn_event >-- */
+
+.botton_event {
+  margin: 20px 0 0 280px;
+
+}
+
+/* enviarbutton settings*/ 
+
+.enviarbotton {
+  padding: 20px 110px;
+  background: #0A3871;
+  border-radius: 20px;
+  border:1.5px solid #0A3871;
+  color: #F3F5FC;
+  font-size: 15px;
+  font-weight: 300;
+    transition: 1s all;
+}
+
+.enviarbotton:hover{
+    background: #EA9010;
+    cursor: pointer;
+    border-color: #EA9010;
+    transform: scale(1.1);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    
+}
+
+.enviarbotton:active {
+  background-color:red ;
+}
+
+/* Desencriptarbutton settings*/ 
+
+.Desencriptarbotton {
+  padding: 20px 110px;
+  background: #D8DFE8;
+  border-radius: 20px;
+  border: 1.5px solid;
+  border-color: #0A3871;
+  color: #0A3871;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 40px;
+    transition: 1s all;
+
+}
+
+.Desencriptarbotton:hover{
+    background:#e63946;
+    cursor: pointer;
+    border-color: #e63946;
+    transform: scale(1.1);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3)
+}
+
+/* button copiar */
+
+.copiar-mensaje{
+  position: absolute;
+  left: 1043px;
+  top: 542px;
+  z-index:1;
+  padding: 20px 110px;
+  background:white;
+  border-radius: 20px;
+  border:1.5px solid #0A3871;
+  color: #0A3871;
+  font-size: 15px;
+  font-weight: 300;
+  display: none;
+}
+
+.copiar-mensaje:hover{
+background:#e63946;
+cursor: pointer;
+border-color: #e63946;
+transform: scale(1.1);
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3)
+}
