@@ -1,187 +1,120 @@
-// -------- selecionando los elementos de html.
+'use strict';
 
-const main = document.querySelector("main");
-const texArea = document.querySelector("textarea");
-const a = document.querySelector(".copiar-mensaje");
-const lizy = document.querySelector("#mensaje");
-const nikole = document.querySelector(".circule")
+/* ==========================================================================
+   LÓGICA PURA
+   ========================================================================== */
 
-// ---------  creando de forma dinammica la clase second-div.
-const divSecond = document.createElement("div");
-      divSecond.classList.add("second_div");
-      main.appendChild(divSecond);
-      main.insertBefore(divSecond, main.childNodes[2]);
-const p_one =  document.createElement("p");
-      p_one.id = "aviso";
-      p_one.innerHTML = "Ningún mensaje fue <br> encontrado";
-      divSecond.appendChild(p_one);
+const CODIGOS = [["e", "enter"], ["i", "imes"], ["a", "ai"], ["o", "ober"], ["u", "oufar"]];
 
-const p_two = document.createElement("p");
-      p_two.id = "mensaje";
-      p_two.innerHTML= "Ingresa el texto que desees encriptar o <br> desencriptar.";
-      divSecond.appendChild(p_two);
-
-// --------- encritacion de codigo
-
-function encriptar(nami) {
-    const matrizDeCodigo = [["e", "enter"], ["i", "imes"], ["a", "ai"], ["o", "ober"], ["u", "oufar"]];
-    for (let i = 0; i < matrizDeCodigo.length; i++) {
-        if (nami.includes(matrizDeCodigo[i][0])) {
-            nami = nami.replaceAll(matrizDeCodigo[i][0], matrizDeCodigo[i][1])
-
-
-        }
-    }
-    return nami
+function encriptar(texto) {
+  let resultado = texto;
+  for (const [letra, codigo] of CODIGOS) {
+    resultado = resultado.replaceAll(letra, codigo);
+  }
+  return resultado;
 }
 
-// ------- funcion de detectar mayuscula;
-function detectar_mayuscula(){
-   const   textto = texArea.value;
-   const   mayusculas = /[A-Z]/.test(textto);
-   const   acentos = /[áéíóúÁÉÍÓÚ]/.test(textto);
-
-
-   if(acentos  || mayusculas){
-    window.alert(" 🚫 ¡Por favor solo letras minúsculas y sin acentos!");
-    texArea.value = "";
-    }
+function desencriptar(texto) {
+  let resultado = texto;
+  for (const [letra, codigo] of CODIGOS) {
+    resultado = resultado.replaceAll(codigo, letra);
+  }
+  return resultado;
 }
 
-function resetArea() {
-    divSecond.style.cssText = '';
-    divSecond.innerHTML = `
-    <p id="aviso">Ningún mensaje fue <br> encontrado</p>
-    <p id="mensaje">Ingresa el texto que desees encriptar o <br> desencriptar.</p>`;
-    a.style.display = "none";
-    detectar_mayuscula();
+function esValido(texto) {
+  const mayusculas = /[A-Z]/.test(texto);
+  const acentos = /[áéíóúÁÉÍÓÚ]/.test(texto);
+  return !(mayusculas || acentos);
 }
 
+/* ==========================================================================
+   REFERENCIAS DOM
+   ========================================================================== */
 
+const campo = document.getElementById("campo");
+const botonEncriptar = document.getElementById("encriptar");
+const botonDesencriptar = document.getElementById("desencriptar");
+const botonCopiar = document.getElementById("copiar");
+const panelResultado = document.getElementById("resultado");
+const mensaje = document.getElementById("mensaje");
 
-texArea.addEventListener("input", resetArea);
+const estadoInicial = mensaje.innerHTML;
 
+/* ==========================================================================
+   FUNCIONES UI
+   ========================================================================== */
 
-
-// ----- funcion de encritacion   con el boton
-
-
-function btnencriptar() {
-    luna = encriptar(texArea.value);
-    divSecond.innerHTML=luna
-    divSecond.style.backgroundImage = 'none';
-    divSecond.style.padding = "10px";
-    divSecond.style.hyphens = "auto";
-    divSecond.style.fontSize = "25px";
-    divSecond.style.width    = '287px';
-    divSecond.style.overflow = "hidden";
-    divSecond.style.padding = "10px";
-    a.style.display = "inline-block";
-    divSecond.style.textAlign ="top" 
-    texArea.value = ""; 
-    a.addEventListener('click', function(){
-        if (luna) {
-            // Utilizar el Clipboard API para copiar el contenido
-            navigator.clipboard.writeText(luna)
-                .then(() => {
-                    // Notificar que se ha copiado el contenido (opcional)
-                    alert('✅ Contenido copiado al portapapeles');
-                })
-                .catch((err) => {
-                    console.error('❌ Error al copiar al portapapeles: ', err);
-                });
-        } else {
-            // Notificar al usuario si no hay contenido encriptado
-            alert('🚫 No hay contenido encriptado para copiar');
-        }
-        
-    });
+function mostrarResultado(texto) {
+  mensaje.innerHTML = texto;
+  panelResultado.classList.add("panel__resultado--con-resultado");
+  botonCopiar.style.display = "block";
 }
 
+function restaurarPanel() {
+  mensaje.innerHTML = estadoInicial;
+  panelResultado.classList.remove("panel__resultado--con-resultado");
+  botonCopiar.style.display = "none";
+}
 
+function procesar(transformacion) {
+  const texto = campo.value;
+  if (!esValido(texto)) {
+    window.alert("🚫 ¡Por favor solo letras minúsculas y sin acentos!");
+    campo.value = "";
+    restaurarPanel();
+    return;
+  }
+  mostrarResultado(transformacion(texto));
+  campo.value = "";
+}
 
+async function copiarTexto() {
+  const texto = mensaje.innerHTML.replace(/<br\s*\/?>/gi, "\n");
+  if (!texto) {
+    window.alert("🚫 No hay contenido para copiar");
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(texto);
+    window.alert("✅ Contenido copiado al portapapeles");
+  } catch (err) {
+    console.error("❌ Error al copiar al portapapeles: ", err);
+  }
+}
 
-// ---- color de imput 
+/* ==========================================================================
+   ANIMACIÓN DE INDICADORES
+   ========================================================================== */
 
-var textarea = document.getElementById("myTextarea");
-var timerId;
-var uno, dos, tres;
+const indicadores = document.querySelectorAll(".aviso__indicadores .indicador");
+let timerId;
 
 function cambiarColores() {
-    uno = document.querySelector(".container .uno");
-    dos = document.querySelector(".container .dos");
-    tres = document.querySelector(".container .tres");
-
-    var tempColor = uno.style.backgroundColor;
-    uno.style.backgroundColor = tres.style.backgroundColor;
-    tres.style.backgroundColor = dos.style.backgroundColor;
-    dos.style.backgroundColor = tempColor;
+  const colores = Array.from(indicadores, (el) => el.style.backgroundColor || getComputedStyle(el).backgroundColor);
+  if (colores.length !== 3) return;
+  const [rojo, amarillo, verde] = colores;
+  indicadores[0].style.backgroundColor = verde;
+  indicadores[1].style.backgroundColor = rojo;
+  indicadores[2].style.backgroundColor = amarillo;
 }
 
 function restaurarColores() {
-    uno.style.backgroundColor = "#EF4139";
-    dos.style.backgroundColor = "#FDBD14";
-    tres.style.backgroundColor = "#1BCA34";
+  indicadores[0].style.backgroundColor = "#EF4139";
+  indicadores[1].style.backgroundColor = "#FDBD14";
+  indicadores[2].style.backgroundColor = "#1BCA34";
 }
 
-textarea.addEventListener("input", function () {
-    clearTimeout(timerId);
-    cambiarColores();
+/* ==========================================================================
+   EVENTOS
+   ========================================================================== */
 
-    timerId = setTimeout(function () {
-        restaurarColores();
-    }, 1000);
+botonEncriptar.addEventListener("click", () => procesar(encriptar));
+botonDesencriptar.addEventListener("click", () => procesar(desencriptar));
+botonCopiar.addEventListener("click", copiarTexto);
+
+campo.addEventListener("input", () => {
+  clearTimeout(timerId);
+  cambiarColores();
+  timerId = setTimeout(restaurarColores, 1000);
 });
-
-
-function desencriptar(gianela) {
-    const matrizDeCodigo = [["e", "enter"], ["i", "imes"], ["a", "ai"], ["o", "ober"], ["u", "oufar"]];
-    for (let i = 0; i < matrizDeCodigo.length; i++) {
-        if (gianela.includes(matrizDeCodigo[i][1])) {
-            gianela = gianela.replaceAll(matrizDeCodigo[i][1], matrizDeCodigo[i][0])
-
-
-        }
-    }
-    return gianela
-}
-
-
-function btndesencriptar() {
-    luna = desencriptar(texArea.value);
-    divSecond.innerHTML=luna
-    divSecond.style.backgroundImage = 'none';
-    divSecond.style.padding = "10px";
-    divSecond.style.hyphens = "auto";
-    divSecond.style.fontSize = "25px";
-    divSecond.style.width    = '287px';
-    divSecond.style.overflow = "hidden";
-    divSecond.style.padding = "10px";
-    a.style.display = "inline-block";
-    divSecond.style.textAlign ="top" 
-    texArea.value = ""; 
-    a.addEventListener('click', function(){
-        if (luna) {
-            // Utilizar el Clipboard API para copiar el contenido
-            navigator.clipboard.writeText(luna)
-                .then(() => {
-                    // Notificar que se ha copiado el contenido (opcional)
-                    alert('✅ Contenido copiado al portapapeles');
-                })
-                .catch((err) => {
-                    console.error('❌ Error al copiar al portapapeles: ', err);
-                });
-        } else {
-            // Notificar al usuario si no hay contenido encriptado
-            alert('🚫 No hay contenido desencriptado para copiar');
-        }
-        
-    });
-}
-
-
-
-
-
-
-

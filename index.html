@@ -2,51 +2,51 @@
 <html lang="es">
 
 <head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
- <link rel="stylesheet" href="./css/reset.css">
- <link rel="stylesheet" href="./css/stylos.css">
- 
- <link rel="shortcut icon" type="image/png" href="./img/h1.png">
- <title>Challenge-Encritador </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge - Encriptador</title>
+  <link rel="shortcut icon" type="image/png" href="./img/h1.png">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/stylos.css">
+  <script src="./js/scritp.js" defer></script>
 </head>
 
 <body>
 
- <header>
-  <h1> <img src="./img/pictograma.png" class="picture"></h1>
- </header>
+  <header class="encabezado">
+    <img src="./img/pictograma.png" alt="Logo" class="encabezado__logo">
+  </header>
 
- <main>
+  <main class="panel">
 
-   <div class="first_div">
-     <textarea name="texto" id="myTextarea" cols="40" rows="10" class="nikole" placeholder="Ingrese el texto aqui "></textarea>
-   </div>
+    <section class="panel__entrada">
+      <label class="entrada" for="campo">
+        <textarea id="campo" class="campo" placeholder="Ingrese el texto aqui" aria-label="Ingrese el texto a encriptar o desencriptar"></textarea>
+      </label>
 
-   
-
-   <div class="alert">
-        <div class="circle">
-          <p class="exclamation">!</p>
+      <div class="aviso" role="note">
+        <span class="aviso__icono" aria-hidden="true">!</span>
+        <span class="aviso__texto">Solo letras minúsculas y sin acentos.</span>
+        <div class="aviso__indicadores">
+          <span class="indicador indicador--rojo" aria-hidden="true"></span>
+          <span class="indicador indicador--amarillo" aria-hidden="true"></span>
+          <span class="indicador indicador--verde" aria-hidden="true"></span>
         </div>
-       <span> Solo letras minúsculas y sin acentos.</span>
-        <div class="container">
-            <div class ="uno"></div>
-            <div class ="dos"></div>
-            <div class ="tres"></div>
-        </div>
-   </div>
+      </div>
 
-   <div class="botton_event">
-        <button class="enviarbotton" onclick="btnencriptar()"> Encriptar </button>
-        <button class="Desencriptarbotton" onclick="btndesencriptar()">Desencriptar </button>
-   </div>
-   <button id="boton-copiar" class="copiar-mensaje"=>Copiar</button>
+      <div class="acciones">
+        <button type="button" id="encriptar" class="boton boton--encriptar">Encriptar</button>
+        <button type="button" id="desencriptar" class="boton boton--desencriptar">Desencriptar</button>
+      </div>
+    </section>
 
- </main>
+    <section class="panel__resultado" id="resultado">
+      <p id="aviso" class="resultado__titulo">Ningún mensaje fue <br> encontrado</p>
+      <p id="mensaje" class="resultado__texto">Ingresa el texto que desees encriptar o <br> desencriptar.</p>
+      <button type="button" id="copiar" class="boton boton--copiar" aria-label="Copiar resultado">Copiar</button>
+    </section>
 
- <script  src="./js/scritp.js"></script>
+  </main>
 
 </body>
 

@@ -1,234 +1,328 @@
-/* -- importing fonts from google fonts -- */
+/* ==========================================================================
+   BASE - variables y reset de estilos generales
+   ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root {
+  --azul-primario: #0A3871;
+  --naranja: #EA9010;
+  --rojo: #e63946;
+  --fondo: #F3F5FC;
+  --tono: #D8DFE8;
+  --gris: #495057;
+  --blanco: #FFFFFF;
+  --rojo-ind: #EF4139;
+  --amarillo-ind: #FDBD14;
+  --verde-ind: #1BCA34;
+  --radius: 20px;
+  --sombra: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  --fuente: 'Roboto', sans-serif;
+}
 
-/* ========== body ========== */
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background: #F3F5FC;
+  font-family: var(--fuente);
+  font-weight: 400;
+  background: var(--fondo);
+  color: var(--azul-primario);
+  min-height: 100vh;
+  padding: 1rem;
 }
 
-/* ===== header ===== */
+/* ==========================================================================
+   ATOMOS
+   ========================================================================== */
 
-.picture {
-  padding: 20px 0px 5px 90px;
+/* -- logo -- */
+.encabezado__logo {
+  display: block;
+  padding: 1.25rem 1rem 0.5rem 2rem;
 }
 
-/* ===== main ===== */
-
-/* -- < div class= first_div > --*/
-
-.first_div {
-  margin: 0 10px 0 250px;
-  border: solid;
-  border-color:transparent;
-  border-radius: 10px;
-  display: inline-block;
-
-}
-
-/*  textarea settings class=nikole */
-
-.nikole {
-  margin: 10px;
-  padding: 14px;
+/* -- campo de texto -- */
+.campo {
+  width: 100%;
+  height: 72vh;
+  padding: 1rem;
+  border: 2px solid rgb(230, 10, 219);
   border-radius: 5px;
-  border: 2px solid skyblue;
   background: rgba(255, 255, 255, 0.1);
   resize: none;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--fuente);
   font-weight: 400;
-  font-size: 30px;
-  color: #0A3871;
-
-}
-
-.nikole::placeholder {
-  color: #0A3871;
-  font-size: 30px;
-  font-family: 'Roboto', sans-serif;
-}
-
-.nikole:focus {
+  font-size: 1.6rem;
+  color: var(--azul-primario);
   outline: none;
-  border-color:transparent;
+  overflow: auto;
 }
 
-.nikole::-webkit-scrollbar {
+.campo::placeholder {
+  color: var(--azul-primario);
+  font-size: 1.6rem;
+  font-family: var(--fuente);
+}
+
+.campo::-webkit-scrollbar {
   display: none;
 }
 
-/* -- <  div class= second_div > --*/
-.second_div {
-  border: solid;
-  border-color: transparent;
-  border-radius: 20px;
-  background: white;
+/* -- boton base -- */
+.boton {
+  padding: 1.1rem 2.2rem;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--azul-primario);
+  font-size: 1rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 50px;
+  width: 200px;
+}
+
+/* -- indicador de color -- */
+.indicador {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.indicador--rojo {
+  background: var(--rojo-ind);
+}
+
+.indicador--amarillo {
+  background: var(--amarillo-ind);
+}
+
+.indicador--verde {
+  background: var(--verde-ind);
+}
+
+/* ==========================================================================
+   MOLECULAS
+   ========================================================================== */
+
+/* -- aviso -- */
+.aviso {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--gris);
+}
+
+.aviso__icono {
+  background: var(--gris);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  color: var(--blanco);
+  font-family: var(--fuente);
+  font-size: 0.75rem;
+  line-height: 16px;
+  flex-shrink: 0;
+}
+
+.aviso__indicadores {
+  margin-left: auto;
+}
+
+.aviso__indicadores .indicador {
+  margin-left: 4px;
+}
+
+/* -- acciones -- */
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* -- botones variantes -- */
+.boton--encriptar {
+  background: var(--azul-primario);
+  border-color: var(--azul-primario);
+  color: var(--fondo);
+}
+
+.boton--encriptar:hover {
+  background: var(--naranja);
+  border-color: var(--naranja);
+  transform: scale(1.05);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.boton--encriptar:active {
+  background: var(--rojo);
+}
+
+.boton--desencriptar {
+  background: var(--tono);
+  border-color: var(--azul-primario);
+  color: var(--azul-primario);
+}
+
+.boton--desencriptar:hover {
+  background: var(--rojo);
+  border-color: var(--rojo);
+  color: var(--blanco);
+  transform: scale(1.05);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.boton--copiar {
+  display: none;
+  background: var(--blanco);
+  color: var(--azul-primario);
+  margin-top: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.boton--copiar:hover {
+  background: var(--rojo);
+  border-color: var(--rojo);
+  color: var(--blanco);
+  transform: scale(1.05);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================================
+   ORGANISMOS
+   ========================================================================== */
+
+/* -- panel principal -- */
+.panel {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.panel__entrada {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 1rem 0 0;
+}
+
+/* -- panel de resultado -- */
+.panel__resultado {
+  background: var(--blanco);
   background-image: url(../img/Muñeco.png);
   background-repeat: no-repeat;
   background-position: center;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  padding: 10px;
-  width: 280px;
-  height: 610px;
-  top: 10px;
-  left: 1020px;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
+  border-radius: var(--radius);
+  box-shadow: var(--sombra);
+  padding: 1rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  min-height: 460px;
 }
 
-
-/* --< p id="aviso" > --*/
-#aviso{
-margin-top: 28rem;
-text-align: center;
-font-weight: bold;
-font-size: 18px;
+.panel__resultado--con-resultado {
+  justify-content: flex-start;
+  background-image: none;
 }
 
-#mensaje{
-  margin-top: 10px;
+.resultado__titulo {
+  margin-top: auto;
   text-align: center;
-  font-size: 14px;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
-
-
-
-
-/* -- < div class= alert > -- */
-
-/* circle */
-.alert{
-  font-size: 12px;
-  margin-left: 280px;
-  color:#495057
-  
-}
-.circle {
-  background: #495057;
-  border-radius: 50%;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  text-align: center; 
+.resultado__texto {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--gris);
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
-.exclamation {
-  display: inline-block;
-  line-height: 16px;
-  color: white;
-  font-family: 'Roboto', sans-serif;
-}
-
-.container {
-  display: inline-block;
-  margin-left: 350px;
-}
-
-.uno, .dos, .tres {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.uno {
-  background: #EF4139;
-}
-
-.dos {
-  background: #FDBD14;
-}
-
-.tres {
-  background: #1BCA34;
-}
-
-
-/* -- < div class= buttn_event >-- */
-
-.botton_event {
-  margin: 20px 0 0 280px;
-
-}
-
-/* enviarbutton settings*/ 
-
-.enviarbotton {
-  padding: 20px 110px;
-  background: #0A3871;
-  border-radius: 20px;
-  border:1.5px solid #0A3871;
-  color: #F3F5FC;
-  font-size: 15px;
-  font-weight: 300;
-    transition: 1s all;
-}
-
-.enviarbotton:hover{
-    background: #EA9010;
-    cursor: pointer;
-    border-color: #EA9010;
-    transform: scale(1.1);
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-    
-}
-
-.enviarbotton:active {
-  background-color:red ;
-}
-
-/* Desencriptarbutton settings*/ 
-
-.Desencriptarbotton {
-  padding: 20px 110px;
-  background: #D8DFE8;
-  border-radius: 20px;
-  border: 1.5px solid;
-  border-color: #0A3871;
-  color: #0A3871;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 40px;
-    transition: 1s all;
-
-}
-
-.Desencriptarbotton:hover{
-    background:#e63946;
-    cursor: pointer;
-    border-color: #e63946;
-    transform: scale(1.1);
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3)
-}
-
-/* button copiar */
-
-.copiar-mensaje{
-  position: absolute;
-  left: 1043px;
-  top: 542px;
-  z-index:1;
-  padding: 20px 110px;
-  background:white;
-  border-radius: 20px;
-  border:1.5px solid #0A3871;
-  color: #0A3871;
-  font-size: 15px;
-  font-weight: 300;
+.panel__resultado--con-resultado .resultado__titulo {
   display: none;
 }
 
-.copiar-mensaje:hover{
-background:#e63946;
-cursor: pointer;
-border-color: #e63946;
-transform: scale(1.1);
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3)
+.panel__resultado--con-resultado .resultado__texto {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: var(--azul-primario);
+}
+
+.panel__resultado--con-resultado .boton--copiar {
+  display: block;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* -- tablet -- */
+@media (max-width: 1024px) {
+  .panel {
+    grid-template-columns: 1fr 320px;
+    gap: 1.5rem;
+  }
+}
+
+/* -- movil -- */
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .encabezado__logo {
+    padding: 1rem 0 0.5rem 1rem;
+  }
+
+  .panel {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+
+  .panel__entrada {
+    padding: 0;
+  }
+
+  .campo {
+    min-height: 220px;
+    font-size: 1.3rem;
+  }
+
+  .campo::placeholder {
+    font-size: 1.3rem;
+  }
+
+  .acciones {
+    flex-direction: column;
+  }
+
+  .boton {
+    width: 100%;
+    padding: 1.1rem 1rem;
+  }
+
+  .panel__resultado {
+    min-height: 300px;
+  }
+
+  .aviso__indicadores {
+    margin-left: 0;
+  }
 }
