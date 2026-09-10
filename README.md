@@ -1,8 +1,10 @@
 ## Challenge Encriptador | Oracle + Alura
 
-<p align="center" >
-     <img src="https://user-images.githubusercontent.com/98281066/236635863-78c1c884-8285-431d-9afa-7320441f6e8d.png">
+<p align="center">
+    <img src="./previeww.png" alt="Juego del Ahorcado" width="1000">
 </p>
+
+
 <div align="center">
     <img src="https://img.shields.io/badge/JavaScript-FEFF01?logo=javascript&logoColor=000000&style=for-the-badge"/>
     <img src="https://img.shields.io/badge/HTML-EC6231?logo=html5&logoColor=FFFFFF&style=for-the-badge" />
